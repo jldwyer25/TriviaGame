@@ -1,3 +1,7 @@
+
+
+
+
 var correctAnswer = 0;
 var wrongAnswer = 0;
 var unanswered = 0;
@@ -47,3 +51,34 @@ var questions = [{
     rightAnswer: "Skeeter",
     image: "assets/images/skeeter.gif",
 }];
+
+var setIntervalId;
+var setTimeoutId;
+
+$('#start').on('click', function(){
+    $(this).hide();
+    newGame();
+});
+
+$('#start-over').on('click', function(){
+    $(this).hide();
+    newGame();
+});
+
+function newGame(){
+    $('')
+}
+
+// function questTimer(){
+//     setIntervalId=setInterval(function(){
+//         $("#quiz-area").html(question);
+//     }, 30000);
+// }
+
+// function gameStart(){
+//     clearInterval(setIntervalId);
+//     setIntervalId = setInterval(getQuestion, 30000);
+//     function getQuestion(){
+
+//     }
+// };
