@@ -1,16 +1,16 @@
+$(document).ready(function(){
+  
+    // event listeners
+    $("#remaining-time").hide();
+    $("#start").on('click', trivia.startGame);
+    $(document).on('click' , '.option', trivia.guessChecker);
+    
+  })
 
-
-
-
-// var correctAnswer = 0;
-// var wrongAnswer = 0;
-// var unanswered = 0;
-// var countStartNumber = 30;
-// var card = $("#quiz-area");
 
 //SET THEM QUESTIONS
 
-var questions = [{
+var trivia = [{
     question: "What was the first full length CGI movie?",
     answers: ["A Bug's Life", "Monsters Inc.", "Toy Story", "Cars"],
     rightAnswer: "Toy Story",
@@ -52,75 +52,58 @@ var questions = [{
     image: "assets/images/skeeter.gif",
 }];
 
-var game = {
-    questions: questions,
-    currentQuestion: 0,
-    counter: 30,
-    correctAnswer: 0,
-    wrongAnswer: 0,
-    countdown: function () {
-        game.counter--;
-        if (game.counter <= 0) {
-            console.log("Time's up!");
-            game.timesUp();
-        }
-    },
-    loadQuestion: function () {
-        timer = setInterval(game.countdown, 1000);
-        $("#sub-wrapper").html("<h2>" + question[game.currentQuestion].question + "</h2>");
-        for (var i = 0; i < questions[game.currentQuestion].answers.length; i++) {
-            $("#subwrapper").append('<button class="answer-button" id="button-' + i + '" data-name="' + questions[game.currentQuestion].answers[i] + '">' + questions[game.currentQuestion].answers[i] + '</button>');
-        }
-    },
-    timesUp: function () {
+var intervalId;
+var setTimeoutId;
+var game;
+var counter=0;
+var correctAnswer=0;
+var incorrectAnswer=0;
+var noAnswer=0;
 
-    },
+var timer=30;
+timerOn=false;
+arrayIndex=0;
 
-    results: function () {
+    function displayQuestion(){
+        clearInterval(setIntervalId);
+        setIntervalId = setInterval(getQuestion, 30000);
+    }
 
-    },
-    clicked: function () {
-
-    },
-    answeredCorrectly: function () {
-
-    },
-    answeredIncorrectly: function () {
-
-    },
-    newGame: function () {
+    function getQuestion(){
+        $("#quiz-area").html(trivia.question[i]);
+        for (i=0;i<trivia.question.length;i++);
 
     }
 
-};
-
-var setIntervalId;
-var setTimeoutId;
-
 $('#start').on('click', function () {
     $(this).hide();
-    game.loadQuestion();
+    game.getQuestion();
+    console.log(question);
 });
 
-$('#start-over').on('click', function () {
-    $(this).hide();
-    newGame();
-});
 
-function newGame() {
-    $('')
-}
+ 
+//  function getQuestion()
+//  {     
+//                       get the Questionarray
+ 
+//  if there is no  click{
+//      You ran out of time
+//  Display answer with animated gif
+//      Unanswer++;
+//             }
+//  }
+ 
 
-// function questTimer(){
-//     setIntervalId=setInterval(function(){
-//         $("#quiz-area").html(question);
-//     }, 30000);
-// }
 
-// function gameStart(){
-//     clearInterval(setIntervalId);
-//     setIntervalId = setInterval(getQuestion, 30000);
-//     function getQuestion(){
-
-//     }
-// };
+    //  function getQuestion()
+    //  {     
+    //                       get the Questionarray
+     
+    //  if there is no  click{
+    //      You ran out of time
+    //  Display answer with animated gif
+    //      Unanswer++;
+    //             }
+    //  }
+    
