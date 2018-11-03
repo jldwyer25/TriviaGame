@@ -42,27 +42,30 @@ var questions = [{
     rightAnswer: "Skeeter",
     image: "assets/images/skeeter.gif",
 }];
-
+//global variables for counter & where i want my items to display
 
 var countStartNumber = 30;
 var card = $("#quiz-area");
 
+//when clicked the startover button, game resets
 
-
-$(document).on("click", "#start-over", function(j) {
+$(document).on("click", "#restart", function(j) {
     game.reset();
   });
 
-
+//this lets the quiz know an answer has been clicked
   $(document).on("click", ".answer-button", function(j){
     game.clicked(j);
 });
 
+
+//this is for starting the game, loading quetions
 $(document).on("click", "#start", function(j){
     $("#timer").append("<h4>Time Remaining: "+countStartNumber+"</h2>");
     game.loadQuestion();
 })
 
+//put game variables in an object so that they can be referred to as this or pulled from the original array
 
 var game = {
     questions:questions,
@@ -79,33 +82,43 @@ var game = {
             game.timesUp();
         }
     },
+//this works^^
 
+//to load a question and display in the quiz area
     loadQuestion: function(){
         timer = setInterval(game.countdown, 1000)
-        card.html("<h2>" + questions[this.currentQuestion].question + "</h2>");
-        for (var i=0; i<questions[this.currentQuestions].answers.length;i++){
-            card.append('<button class="answer-button" id=button'+ 'data-name="' + questions[this.currentQuestion].answers[i] + '">' + questions[this.currentQuestion].answers[i]+ '</button>');
+        console.log(questions[game.currentQuestion].question);
+        console.log(questions[game.currentQuestion].answers);
+        console.log(questions[game.currentQuestion].rightAnswer);
+        card.html("<h2>" + questions[game.currentQuestion].question + "</h2>");
+        for (var i=0; i<questions[game.answers];i++){
+            //THIS IS MY PROBLEM ABOVE
+            card.append('<button class="answer-button" id=button'+ 'data-name="' + questions[game.currentQuestion].answers[i] + '">' + questions[this.currentQuestion].answers[i]+ '</button>');
         }
     },
+    //how to get question after question
     nextQuestion: function(){
         game.counter=countStartNumber;
         $("#counter-number").html(game.counter);
         game.currentQuestion++;
         game.loadQuestion();
     },
+    // if no answer has been selected, times up
     timesUp: function(){
         clearInterval(timer);
         $("#counter-number").html(game.counter);
         card.html("<h2> TIMES UP</h2>");
-        card.append('<h4> Correct Answer is: ' + questions[this.currentQuestion].correctAnswer);
-        card.append('<img src="' + questions[this.currentQuestion].image + '"/>');
+        card.append('<h4> Correct Answer is: ' + questions[game.currentQuestion].rightAnswer);
+        card.append('<img src="' + questions[game.currentQuestion].image + '"/>');
 
+        //display the gif for 3 sec
         if (game.currentQuestion === questions.length - 1){
             setTimeout(game.result, 3000);
         } else {
             setTimeout(game.nextQuestion, 3000);
         }
     },
+    //for the end of the game
     result: function(){
         clearInterval(timer);
 
@@ -116,13 +129,14 @@ var game = {
         card.append("<h3>Unanswered: " + game.unanswered + "</h3>");
         card.append('<button id="restart">Restart?</button>');
     },
+
     clicked:function(j) {
         clearInterval(timer);
-
-        if($(j.target).data("name")===questions[this.currentQuestion].correctAnswer){
-            this.answeredCorrectly();
+//verify the answer is correct or incorrect
+        if($(j.target).data("name")===questions[game.currentQuestion].rightAnswer){
+            game.answeredCorrectly();
             } else{
-                this.answeredIncorrectly();
+                game.answeredIncorrectly();
             }
         },
 
@@ -133,11 +147,14 @@ var game = {
             card.append('<img src="'+questions[game.currentQuestion].image+'"/>');
 
             if(game.currentQuestion===questions.length-1){
+                rightAnswer++
                 setTimeout(game.result,3000);
             }else{
                 setTimeout(game.nextQuestion, 3000);
             }
         },
+
+        // when game is reset
         reset: function(){
             this.currentQuestion = 0;
             this.counter = countStartNumber;
