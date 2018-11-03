@@ -93,7 +93,7 @@ var game = {
         card.html("<h2>" + questions[game.currentQuestion].question + "</h2>");
         for (var i=0; i<questions[game.currentQuestion].answers.length;i++){
             //THIS IS MY PROBLEM ABOVE
-            card.append("<button class='answer-button' id='button'   data-name='" + questions[game.currentQuestion].answers[0] + "' >" + questions[this.currentQuestion].answers[i]+ "'</button>'");
+            card.append("<button class='answer-button' id='button' data-name='" + questions[game.currentQuestion].answers[0] + "' >" + questions[this.currentQuestion].answers[i]+ "'</button>'");
         }
     },
     //how to get question after question

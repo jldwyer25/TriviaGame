@@ -64,3 +64,8 @@ button:hover {
   background: pink;
   border: 2px solid blue;
 }
+
+#quiz-area{
+  position: relative;
+  top: 15%;
+}
