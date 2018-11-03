@@ -2,11 +2,11 @@
 
 
 
-// var correctAnswer = 0;
-// var wrongAnswer = 0;
-// var unanswered = 0;
-// var countStartNumber = 30;
-// var card = $("#quiz-area");
+var correctAnswer = 0;
+var wrongAnswer = 0;
+var unanswered = 0;
+var countStartNumber = 30;
+var card = $("#quiz-area");
 
 //SET THEM QUESTIONS
 
@@ -52,54 +52,36 @@ var questions = [{
     image: "assets/images/skeeter.gif",
 }];
 
-var game = {
-    questions: questions,
-    currentQuestion: 0,
-    counter: 30,
-    correctAnswer: 0,
-    wrongAnswer: 0,
-    countdown: function () {
-        game.counter--;
-        if (game.counter <= 0) {
+
+
+
+
+    function countdown () {
+        countStartNumber=30;
+        countStartNumber--;
+        if (countStartNumber <= 0) {
             console.log("Time's up!");
-            game.timesUp();
+            //timesUp();
         }
-    },
-    loadQuestion: function () {
-        timer = setInterval(game.countdown, 1000);
-        $("#sub-wrapper").html("<h2>" + question[game.currentQuestion].question + "</h2>");
-        for (var i = 0; i < questions[game.currentQuestion].answers.length; i++) {
-            $("#subwrapper").append('<button class="answer-button" id="button-' + i + '" data-name="' + questions[game.currentQuestion].answers[i] + '">' + questions[game.currentQuestion].answers[i] + '</button>');
+    };
+
+
+    function loadQuestion() {
+        countStartNumber = setInterval(countdown, 30000);
+        $("#sub-wrapper").append("<h2>" + [questions.question] + "</h2>");
+        $("#timer").html("<h6>" + countStartNumber + "</h6>");
+        for (var i = 0; i < [questions.question.length]; i++) {
+            $("#subwrapper").append('<button class="answer-button" id="button-' + [i] + '" data-name="' + questions[game.currentQuestion].answers[i] + '">' + questions[game.currentQuestion].answers[i] + '</button>');
         }
-    },
-    timesUp: function () {
-
-    },
-
-    results: function () {
-
-    },
-    clicked: function () {
-
-    },
-    answeredCorrectly: function () {
-
-    },
-    answeredIncorrectly: function () {
-
-    },
-    newGame: function () {
-
     }
 
-};
 
 var setIntervalId;
 var setTimeoutId;
 
 $('#start').on('click', function () {
     $(this).hide();
-    game.loadQuestion();
+    loadQuestion();
 });
 
 $('#start-over').on('click', function () {

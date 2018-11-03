@@ -67,17 +67,18 @@ arrayIndex=0;
     function displayQuestion(){
         clearInterval(setIntervalId);
         setIntervalId = setInterval(getQuestion, 30000);
+        $("#quiz-area").append(setIntervalId);
     }
 
     function getQuestion(){
-        $("#quiz-area").html(trivia.question[i]);
+        $("#quiz-area").append(trivia.question[i]);
         for (i=0;i<trivia.question.length;i++);
 
     }
 
 $('#start').on('click', function () {
     $(this).hide();
-    game.getQuestion();
+    trivia.getQuestion();
     console.log(question);
 });
 
