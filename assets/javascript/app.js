@@ -1,13 +1,4 @@
 
-
-
-
-var correctAnswer = 0;
-var wrongAnswer = 0;
-var unanswered = 0;
-var countStartNumber = 30;
-var card = $("#quiz-area");
-
 //SET THEM QUESTIONS
 
 var questions = [{
@@ -53,45 +44,79 @@ var questions = [{
 }];
 
 
+var countStartNumber = 30;
+var card = $("#quiz-area");
 
 
 
-    function countdown () {
-        countStartNumber=30;
-        countStartNumber--;
-        if (countStartNumber <= 0) {
-            console.log("Time's up!");
-            //timesUp();
-        }
-    };
+$(document).on("click", "#start-over", function(j) {
+    game.reset();
+  });
 
 
-    function loadQuestion() {
-        countStartNumber = setInterval(countdown, 30000);
-        $("#sub-wrapper").append("<h2>" + [questions.question] + "</h2>");
-        $("#timer").html("<h6>" + countStartNumber + "</h6>");
-        for (var i = 0; i < [questions.question.length]; i++) {
-            $("#subwrapper").append('<button class="answer-button" id="button-' + [i] + '" data-name="' + questions[game.currentQuestion].answers[i] + '">' + questions[game.currentQuestion].answers[i] + '</button>');
-        }
-    }
-
-
-var setIntervalId;
-var setTimeoutId;
-
-$('#start').on('click', function () {
-    $(this).hide();
-    loadQuestion();
+  $(document).on("click", ".answer-button", function(j){
+    game.clicked(j);
 });
 
-$('#start-over').on('click', function () {
-    $(this).hide();
-    newGame();
-});
+$(document).on("click", "#start", function(j){
+    $("#timer").append("<h4>Time Remaining: "+countStartNumber+"</h2>");
+    game.loadQuestion();
+})
 
-function newGame() {
-    $('')
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//     function countdown () {
+//         countStartNumber=30;
+//         countStartNumber--;
+//         if (countStartNumber <= 0) {
+//             console.log("Time's up!");
+//             //timesUp();
+//         }
+//     };
+
+
+//     function loadQuestion() {
+//         countStartNumber = setInterval(countdown, 30000);
+//         $("#sub-wrapper").append("<h2>" + [questions.question] + "</h2>");
+//         $("#timer").html("<h3>" + countStartNumber + "</h3>");
+//         for (var i = 0; i < questions.length; i++) {
+//             $("#subwrapper").append('<button class="answer-button" id="button-' + [i] + '" data-name="' + questions[currentQuestion].answers[i] + '">' + questions[game.currentQuestion].answers[i] + '</button>');
+//         }
+//     }
+
+
+// var setIntervalId;
+// var setTimeoutId;
+
+// $('#start').on('click', function () {
+//     $(this).hide();
+//     loadQuestion();
+// });
+
+// $('#start-over').on('click', function () {
+//     $(this).hide();
+//     newGame();
+// });
+
+// function newGame() {
+//     $('')
+// }
 
 // function questTimer(){
 //     setIntervalId=setInterval(function(){
