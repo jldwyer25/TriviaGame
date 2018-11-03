@@ -91,9 +91,9 @@ var game = {
         console.log(questions[game.currentQuestion].answers);
         console.log(questions[game.currentQuestion].rightAnswer);
         card.html("<h2>" + questions[game.currentQuestion].question + "</h2>");
-        for (var i=0; i<questions[game.answers];i++){
+        for (var i=0; i<questions[game.currentQuestion].answers.length;i++){
             //THIS IS MY PROBLEM ABOVE
-            card.append('<button class="answer-button" id=button'+ 'data-name="' + questions[game.currentQuestion].answers[i] + '">' + questions[this.currentQuestion].answers[i]+ '</button>');
+            card.append("<button class='answer-button' id='button'   data-name='" + questions[game.currentQuestion].answers[0] + "' >" + questions[this.currentQuestion].answers[i]+ "'</button>'");
         }
     },
     //how to get question after question
@@ -143,16 +143,31 @@ var game = {
         answeredCorrectly: function(){
             clearInterval(timer);
             game.correct++;
-            card.html('<h2>Correct!</h2>')
+            card.html('<h2>Correct!</h2>');
             card.append('<img src="'+questions[game.currentQuestion].image+'"/>');
 
             if(game.currentQuestion===questions.length-1){
-                rightAnswer++
+                game.correct++;
                 setTimeout(game.result,3000);
             }else{
                 setTimeout(game.nextQuestion, 3000);
             }
         },
+
+        answeredIncorrectly: function(){
+            clearInterval(timer);
+            game.incorrect++;
+            card.html('<h2>Incorrect!</h2>');
+            card.append('<img src="'+questions[game.currentQuestion].image+'"/>');
+            if(game.currentQuestion===questions.length-1){
+                incorrect++;
+                setTimeout(game.result,3000);
+            }else{
+                setTimeout(game.nextQuestion, 3000);
+            }
+        },
+
+    
 
         // when game is reset
         reset: function(){
