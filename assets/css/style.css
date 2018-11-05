@@ -68,4 +68,5 @@ button:hover {
 #quiz-area{
   position: relative;
   top: 15%;
+  overflow: auto;
 }

@@ -79,6 +79,7 @@ var game = {
         $("#counter-number").html(game.counter);
         if (game.counter===0){
             console.log("times up, fool");
+            game.unanswered++;
             game.timesUp();
         }
     },
@@ -92,8 +93,13 @@ var game = {
         console.log(questions[game.currentQuestion].rightAnswer);
         card.html("<h2>" + questions[game.currentQuestion].question + "</h2>");
         for (var i=0; i<questions[game.currentQuestion].answers.length;i++){
-            //THIS IS MY PROBLEM ABOVE
-            card.append("<button class='answer-button' id='button' data-name='" + questions[game.currentQuestion].answers[0] + "' >" + questions[this.currentQuestion].answers[i]+ "'</button>'");
+            //THIS IS MY PROBLEM BELOW
+            // card.append("<button class='answer-button' id='button' data-name=" + questions[game.currentQuestion].answers[0] + " >" + questions[this.currentQuestion].answers[i]+ "</button>");
+            var button = $("<button>");
+            button.addClass("answer-button");
+            button.attr("data-name",questions[game.currentQuestion].answers[i]);
+            button.text(questions[game.currentQuestion].answers[i]);
+            card.append(button);
         }
     },
     //how to get question after question
@@ -158,9 +164,10 @@ var game = {
             clearInterval(timer);
             game.incorrect++;
             card.html('<h2>Incorrect!</h2>');
+            card.append('<h4> The Correct Answer Was: ' + questions[game.currentQuestion].rightAnswer);
             card.append('<img src="'+questions[game.currentQuestion].image+'"/>');
             if(game.currentQuestion===questions.length-1){
-                incorrect++;
+                game.incorrect++;
                 setTimeout(game.result,3000);
             }else{
                 setTimeout(game.nextQuestion, 3000);
